@@ -30,6 +30,7 @@ Adicionalmente es necesario configurar las siguientes variables en el archivo `.
 
     # Variable que indicar la url donde se tomaran los assets
     APP_URL=http://localhost
+    APP_FOLDER=
 
     # Variables para la base de datos interna
     DB_HOST=127.0.0.1
