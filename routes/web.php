@@ -44,5 +44,5 @@ Route::middleware('auth')->group(function(){
 });
 
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get(env('APP_URL').'/livewire/livewire.js', $handle);
+    return Route::get(env('APP_FOLDER').'/livewire/livewire.js', $handle);
 });
