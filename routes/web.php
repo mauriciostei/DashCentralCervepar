@@ -8,6 +8,7 @@ use App\Livewire\User\Index;
 use App\Livewire\User\LoginForm;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,6 @@ Route::middleware('auth')->group(function(){
     });
 });
 
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get(env('APP_URL').'/livewire/livewire.js', $handle);
+});

@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $user->level = UserLevel::Admin->value;
         $user->save();
 
-        User::factory(40)->create();
+        // User::factory(40)->create();
     }
 }

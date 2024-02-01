@@ -20,9 +20,10 @@ Para correr la aplicación es necesario contar con:
 1. Clonar el repositorio inicial
 2. Generar una base de datos dentro de PostgreSQL
 3. Correr en la terminal `composer install`
-4. Copiar `.env.example` a `.env` y actualiza los datos de la configuración, principalmente el de la base de datos
-5. Correr en la terminal `php artisan key:generate`
-6. Correr en la terminal `php artisan migrate --seed` para crear la base de datos
+4. Correr en la terminal `npm install`
+5. Copiar `.env.example` a `.env` y actualiza los datos de la configuración, principalmente el de la base de datos
+6. Correr en la terminal `php artisan key:generate`
+7. Correr en la terminal `php artisan migrate --seed` para crear la base de datos
 
 ## Configuración ENV
 Adicionalmente es necesario configurar las siguientes variables en el archivo `.env`:
