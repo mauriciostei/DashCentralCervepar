@@ -25,7 +25,7 @@ if(cantidadAnomalias){
         },
         options: {
             animation: false,
-            responsive: false,
+            responsive: true,
             plugins: {
               legend: {
                 position: 'bottom',

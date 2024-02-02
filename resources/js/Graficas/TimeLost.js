@@ -28,7 +28,8 @@ if(timeLost){
     plugins: [ChartDataLabels],
     options: {
       animation: false,
-      responsive: false,
+      responsive: true,
+      maintainAspectRatio: false,
       indexAxis: 'y',
       plugins: {
         legend: {

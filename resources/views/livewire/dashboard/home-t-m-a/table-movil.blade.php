@@ -1,4 +1,4 @@
-<div class="card card-body table-responsive m-3" wire:poll="getInfo">
+<div class="card card-body table-responsive m-3" wire:poll.2s="getInfo">
     <caption>Móviles circulantes</caption>
     <table class="table table-sm table-hover table-striped">
         <thead>

@@ -1,5 +1,5 @@
 <div>
-    <div class="d-flex flex-row justify-content-between align-items-center">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center">
         <div class="card card-body d-flex flex-column justify-content-between m-3">
             <h5 class="text-center">Cantidad de Anomalías</h5>
             <div class="chart mx-auto">

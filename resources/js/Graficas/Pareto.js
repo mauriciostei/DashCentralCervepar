@@ -27,7 +27,7 @@ if(pareto){
       },
     options: {
         animation: false,
-        responsive: false,
+        responsive: true,
         plugins: {
           legend: {
             display: false,

@@ -1,4 +1,4 @@
-<div wire:poll.1s="send">
+<div wire:poll.2s="send">
     <div class="card card-body d-flex flex-row justify-content-between align-items-center m-3">
         <div class="d-flex flex-row justify-content-around align-items-center">
             <h5 class="me-3 mt-2">CDS:</h5>
