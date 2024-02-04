@@ -14,20 +14,20 @@ if(pareto){
           label: 'Pareto de Motivos',
           data: [],
           fill: false,
-          backgroundColor: 'rgba(54, 162, 235, 0.8)',
+          backgroundColor: 'rgba(146, 199, 207, 0.6)',
           borderColor: 'rgb(54, 162, 235)',
         },{
           type: 'line',
           label: 'Proporción de Anomalías',
           data: [],
           fill: false,
-          backgroundColor: 'rgba(201, 203, 207)',
-          borderColor: 'rgb(201, 203, 207)',
+          backgroundColor: 'rgb(134, 182, 246)',
+          borderColor: 'rgb(134, 182, 246)',
         }]
       },
     options: {
         animation: false,
-        responsive: true,
+        responsive: false,
         plugins: {
           legend: {
             display: false,
