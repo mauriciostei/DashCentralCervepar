@@ -1,17 +1,17 @@
-<div class="card card-body m-2">
+<div class="card card-body mx-3">
     
     <div class="d-flex flex-row justify-content-between align-items-center mb-3">
         <h5>Administración de Usuarios</h5>
 
         <div class="input-group w-25">
-            <span class="input-group-text">Buscar...</span>
+            <span class="input-group-text bg-primary">Buscar...</span>
             <input type="search" class="form-control" wire:model.live="search">
         </div>
         <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo</a>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-sm table-hover table-striped">
+        <table class="table table-sm table-hover table-striped table-dark">
             <thead>
                 <th>Id</th>
                 <th>Nombre</th>

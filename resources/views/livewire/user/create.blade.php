@@ -1,4 +1,4 @@
-<form class="card card-body m-2" wire:submit="save">
+<form class="card card-body mx-3" wire:submit="save">
     
     <div class="d-flex flex-row justify-content-between align-items-center mb-3">
         <h5>Nuevo usuario</h5>
@@ -17,7 +17,7 @@
         <x-forms.input type="password" label="Contraseña del sistema del usuario" placeholder="Contraseña del usuario" wire:model="password"/>
 
         <div class="input-group">
-            <label class="input-group-text">Tipo de Usuario</label>
+            <label class="input-group-text bg-primary">Tipo de Usuario</label>
             <select wire:model.live="level" class="form-control">
                 <option selected disabled value="100">Seleccione el nivel del usuario</option>
                 @foreach(App\Enums\UserLevel::cases() as $case)

@@ -1,6 +1,6 @@
 <div class="card card-body table-responsive m-3" wire:poll.2s="getInfo">
     <caption>Móviles circulantes</caption>
-    <table class="table table-sm table-hover table-striped">
+    <table class="table table-sm table-hover table-striped table-dark">
         <thead>
             <th>
                 @livewire('components.off-canvas', ['titulo' => 'Centros', 'columna' => 'centro'])
@@ -35,7 +35,7 @@
                 @endif
             @empty
                 <tr>
-                    <th class="text-muted text-center" colspan="100">Sin registros!</th>
+                    <th class="text-center" colspan="100">Sin registros!</th>
                 </tr>
             @endforelse
         </tbody>

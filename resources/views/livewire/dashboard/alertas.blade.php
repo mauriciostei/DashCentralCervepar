@@ -1,7 +1,7 @@
 <div wire:poll.2s="send">
     <div class="card card-body d-flex flex-row justify-content-between align-items-center m-3">
         <div class="d-flex flex-row justify-content-around align-items-center">
-            <h5 class="me-3 mt-2">CDS:</h5>
+            <h5 class="me-3 mt-2">CD's:</h5>
             
             <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center">
                 @foreach($cds as $key => $cd)
@@ -14,12 +14,12 @@
         </div>
         <div class="d-flex flex-column flex-lg-row justify-content-between">
             <div class="input-group mb-3 mb-lg-0 me-lg-3">
-                <span class="input-group-text">Desde</span>
+                <span class="input-group-text bg-primary">Desde</span>
                 <input type="date" class="form-control" wire:model.live="ini">
             </div>
     
             <div class="input-group">
-                <span class="input-group-text">Hasta</span>
+                <span class="input-group-text bg-primary">Hasta</span>
                 <input type="date" class="form-control" wire:model.live="fin">
             </div>
         </div>

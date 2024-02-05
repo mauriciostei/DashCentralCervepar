@@ -11,7 +11,7 @@
             @if(str_contains(strtolower($lis['CD']), strtolower($search)))
                 <div class="form-check form-switch col-6">
                     <input class="form-check-input" type="checkbox" value="true" wire:model.live="lista.{{$key}}.visible">
-                    <label class="form-check-label"> {{$lis['CD']}} </label>
+                    <label class="form-check-label text-white"> {{$lis['CD']}} </label>
                 </div>
             @endif
         @endforeach
