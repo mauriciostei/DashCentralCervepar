@@ -21,6 +21,7 @@ trait GetCurrentTMATable{
                         and tiers_id = r.tiers_id
                         and moviles_id = r.moviles_id
                         and choferes_id = r.choferes_id
+                        and viaje = r.viaje
                 ) primer_punto
                 , tv.tiempo_tma
             from recorridos r
