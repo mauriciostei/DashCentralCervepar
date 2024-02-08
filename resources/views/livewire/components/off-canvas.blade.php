@@ -4,8 +4,8 @@
     </button>
     
     <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offCanvas{{$titulo}}" aria-labelledby="offCanvas{{$titulo}}Label" data-bs-backdrop="false" wire:ignore.self>
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offCanvas{{$tabla}}Label">Acciones en: {{$titulo}}</h5>
+        <div class="offcanvas-header" data-bs-theme="dark">
+            <h5 class="offcanvas-title text-white" id="offCanvas{{$tabla}}Label">Acciones en: {{$titulo}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -15,7 +15,8 @@
             @endif
 
             @if($tabla)
-                @livewire('components.search', ['tabla' => $tabla])
+                {{-- @livewire('components.search', ['tabla' => $tabla]) --}}
+                @livewire('components.search-table', ['tabla' => $tabla])
             @endif
             
             @if($columna == 'centro')

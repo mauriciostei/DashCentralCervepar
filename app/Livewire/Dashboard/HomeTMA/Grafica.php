@@ -2,16 +2,11 @@
 
 namespace App\Livewire\Dashboard\HomeTMA;
 
-use App\Traits\AddTimeIntervals;
-use App\Traits\GetCurrentTMATable;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class Grafica extends Component
 {
-    use GetCurrentTMATable;
-    use AddTimeIntervals;
-
     public $cds;
     public $resultado;
 
@@ -20,30 +15,31 @@ class Grafica extends Component
         $this->cds = $filters['cds'];
     }
 
-    public function getInfo(){
-        $data = [];
+    #[On('updateHomeData')]
+    public function updateData($data){
         $labels = [];
+        $values = [];
 
-        foreach($this->cds as $cds):
-            $cd = $cds['CD'];
-            $value = 0;
-            
-            if($cds['visible']):
-                $labels[] = $cds['CD'];
-                foreach($this->getTMATableByCD($cd) as $line):
-                    $value += $line->tma_roto;
-                endforeach;
+        $arr = array_reduce($data, function($carry, $line){
+            if(!isset($carry[$line['centro']])){
+                $carry[$line['centro']] = 0;
+            }
 
-                $data[] = $value;
-            endif;
-        endforeach;
+            if($line['tma_roto'] == 1){
+                $carry[$line['centro']] += $line['tma_roto'];
+            }
 
-        $this->dispatch('updateGraficaTiempoReal', ["labels" => $labels, "data" => $data]);
+            return $carry;
+        }, []);
+        
+        $labels = array_keys($arr);
+        $values = array_values($arr);
+
+        $this->dispatch('updateGraficaTiempoReal', ["labels" => $labels, "data" => $values]);
     }
 
     public function render()
     {
-        $this->getInfo();
         return view('livewire.dashboard.home-t-m-a.grafica');
     }
 }
