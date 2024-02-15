@@ -35,7 +35,7 @@ trait GetTimeLose{
         , resultados as (
             select d.puntos, d.culminados, d.inicio, d.fin, tv.tiempo_tma
                 , case
-                    when d.puntos > d.culminados then ( (current_date - inicio) - tv.tiempo_tma )
+                    when d.puntos > d.culminados then ( (current_timestamp - inicio) - tv.tiempo_tma )
                     else ( (d.fin - d.inicio) - tv.tiempo_tma )
                 end resultado
             from analisis a
