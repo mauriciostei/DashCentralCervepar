@@ -7,6 +7,7 @@
 * Pre requisitos
 * Instalación
 * Configuración ENV
+* Tarea programada
 
 ## Pre requisitos
 
@@ -48,3 +49,9 @@ Adicionalmente es necesario configurar las siguientes variables en el archivo `.
     DB_HOST_CDA=127.0.0.01
     DB_HOST_CDE=127.0.0.01
     DB_HOST_CDEnc=127.0.0.01
+
+## Tarea Programada
+Una vez culminada la configuración se debe añadir la tarea programada encargada de ejecutar el procedimiento de poblar el `HOME` cada `5 minutos`.
+Para ello añadiremos el siguiente comando dentro del cron job del servidor.
+
+    * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1

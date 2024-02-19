@@ -24,4 +24,18 @@ trait AddTimeIntervals{
 
         return "$dd días $hh:$mm:$ss horas";
     }
+
+    public function toTime($value){
+        $hh = $mm = $ss = 0;
+        
+        $ss = $value;
+        $mm = floor( $ss / 60 ); $ss = $ss % 60;
+        $hh = floor( $mm / 60 ); $mm = $mm % 60;
+
+        $hh = str_pad($hh, 2, "0", STR_PAD_LEFT);
+        $mm = str_pad($mm, 2, "0", STR_PAD_LEFT);
+        $ss = str_pad($ss, 2, "0", STR_PAD_LEFT);
+
+        return "$hh:$mm:$ss";
+    }
 }

@@ -2,44 +2,45 @@
 
 namespace App\Livewire\Dashboard\HomeTMA;
 
+use App\Models\CurrentData;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class Grafica extends Component
 {
-    public $cds;
+    public $centros = [];
     public $resultado;
 
-    #[On('updateDashHome')]
-    public function updateInfo($filters){
-        $this->cds = $filters['cds'];
+    #[On('updateFiltercentro')]
+    public function updateCentros($filters){
+        $this->centros = $filters;
     }
 
-    #[On('updateHomeData')]
-    public function updateData($data){
+    public function getInfo(){
         $labels = [];
         $values = [];
 
-        $arr = array_reduce($data, function($carry, $line){
-            if(!isset($carry[$line['centro']])){
-                $carry[$line['centro']] = 0;
-            }
+        $this->resultado = [];
+        foreach($this->centros as $line):
+            $this->resultado[$line] = 0;
+        endforeach;
 
-            if($line['tma_roto'] == 1){
-                $carry[$line['centro']] += $line['tma_roto'];
+        $data = CurrentData::whereIn('centro', $this->centros)->get();
+        foreach($data as $line):
+            if($line->tma_roto){
+                $this->resultado[$line->centro]++;
             }
+        endforeach;
 
-            return $carry;
-        }, []);
-        
-        $labels = array_keys($arr);
-        $values = array_values($arr);
+        $labels = array_keys($this->resultado);
+        $values = array_values($this->resultado);
 
         $this->dispatch('updateGraficaTiempoReal', ["labels" => $labels, "data" => $values]);
     }
 
     public function render()
     {
+        $this->getInfo();
         return view('livewire.dashboard.home-t-m-a.grafica');
     }
 }

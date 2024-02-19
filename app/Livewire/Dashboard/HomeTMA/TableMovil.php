@@ -2,30 +2,35 @@
 
 namespace App\Livewire\Dashboard\HomeTMA;
 
+use App\Models\CurrentData;
 use App\Traits\AddTimeIntervals;
-use App\Traits\GetCurrentTMATable;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class TableMovil extends Component
 {
-    use GetCurrentTMATable;
     use AddTimeIntervals;
 
-    public $cds;
     public $tabla;
     public $tiempo_perdido;
 
+    public $centros = [];
     public $moviles = [];
     public $puntos = [];
     public $operadoras = [];
 
     public $column = 'centro';
-    public $orden = 1;
+    public $orden = 'asc';
 
-    #[On('updateHomeData')]
-    public function updateData($data){
-        $this->tabla = $data;
+    public function getInfo(){
+        $this->tabla = CurrentData::
+            whereIn('centro', $this->centros)
+            ->whereIn('movil', $this->moviles)
+            ->whereIn('operador', $this->operadoras)
+            ->whereIn('punto', $this->puntos)
+            ->orderBy($this->column, $this->orden)
+            ->get()
+        ;
         $perdida = 0;
         $this->tiempo_perdido = '';
 
@@ -33,15 +38,7 @@ class TableMovil extends Component
             $perdida += $this->toSecond($tab['tiempo_perdido']);
         endforeach;
 
-        $temp = array_column($this->tabla, $this->column);
-        array_multisort($temp, $this->orden == 1 ? SORT_ASC : SORT_DESC, $this->tabla);
-
         $this->tiempo_perdido = $this->toInterval($perdida);
-    }
-
-    #[On('updateDashHome')]
-    public function updateInfo($filters){
-        $this->cds = $filters['cds'];
     }
 
     #[On('updateTableOrder')]
@@ -50,28 +47,29 @@ class TableMovil extends Component
         $this->orden = $filters['order'];
     }
 
+    #[On('updateFiltercentro')]
+    public function updateCentros($filters){
+        $this->centros = $filters;
+    }
+
     #[On('updateFiltermovil')]
     public function updateMoviles($filters){
-        $this->moviles = $filters['tabla'];
+        $this->moviles = $filters;
     }
 
     #[On('updateFilterpunto')]
     public function updatePuntos($filters){
-        $this->puntos = $filters['tabla'];
+        $this->puntos = $filters;
     }
 
     #[On('updateFilteroperador')]
     public function updateOperadoras($filters){
-        $this->operadoras = $filters['tabla'];
-    }
-
-    public function mount($cds, $tabla){
-        $this->cds = $cds;
-        $this->tabla = $tabla;
+        $this->operadoras = $filters;
     }
 
     public function render()
     {
+        $this->getInfo();
         return view('livewire.dashboard.home-t-m-a.table-movil');
     }
 }
