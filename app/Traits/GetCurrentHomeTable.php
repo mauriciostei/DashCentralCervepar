@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\DB;
 trait GetCurrentHomeTable{
 
     public function updateTable(){
-        CurrentData::query()->truncate();
+        $table = [];
 
         foreach(CDS::cases() as $c):
-
-            $table = DB::connection($c->value)->select("
+            $consulta = DB::connection($c->value)->select("
             with datos as (
                 select r.moviles_id
                     , r.choferes_id
@@ -49,19 +48,24 @@ trait GetCurrentHomeTable{
                 join operadoras o on o.id = c.operadoras_id
                 join puntos p on p.id = d.puntos_id
             ");
-
-            foreach($table as $line):
-                $cd = new CurrentData();
-                $cd->centro = $line->centro;
-                $cd->movil = $line->movil;
-                $cd->operador = $line->operador;
-                $cd->punto = $line->punto;
-                $cd->inicio = $line->inicio;
-                $cd->primer_punto = $line->primer_punto;
-                $cd->tiempo_tma = $line->tiempo_tma;
-                $cd->save();
+            
+            foreach($consulta as $line):
+                $table[] = $line;
             endforeach;
+        endforeach;
 
+        CurrentData::query()->truncate();
+
+        foreach($table as $line):
+            CurrentData::create([
+                'centro' => $line->centro,
+                'movil' => $line->movil,
+                'operador' => $line->operador,
+                'punto' => $line->punto,
+                'inicio' => $line->inicio,
+                'primer_punto' => $line->primer_punto,
+                'tiempo_tma' => $line->tiempo_tma,
+            ]);
         endforeach;
     }
 }

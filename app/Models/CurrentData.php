@@ -11,6 +11,8 @@ class CurrentData extends Model
     use HasFactory;
     use AddTimeIntervals;
 
+    protected $fillable = ['centro','movil','operador','punto','inicio','primer_punto','tiempo_tma'];
+
     public function getDuracionAttribute(){
         $fecha_actual = date("Y-m-d H:i:s");
         $diferencia = strtotime($fecha_actual) - strtotime($this->inicio);
