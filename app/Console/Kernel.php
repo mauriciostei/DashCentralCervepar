@@ -2,13 +2,14 @@
 
 namespace App\Console;
 
+use App\Traits\GetCurrentHistoryTable;
 use App\Traits\GetCurrentHomeTable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    use GetCurrentHomeTable;
+    use GetCurrentHomeTable, GetCurrentHistoryTable;
     /**
      * Define the application's command schedule.
      */
@@ -18,6 +19,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function(){
             $this->updateTable();
+        })->everyFiveMinutes();
+        // })->everyMinute();
+
+        $schedule->call(function(){
+            $this->updateHistory();
         })->everyFiveMinutes();
         // })->everyMinute();
     }
