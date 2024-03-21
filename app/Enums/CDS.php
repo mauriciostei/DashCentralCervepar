@@ -8,4 +8,9 @@ enum CDS: String{
     case cdo = 'CDO';
     case cde = 'CDE';
     case cdenc = 'CDEnc';
+
+    public static function toArray(): array
+    {
+        return array_column(CDS::cases(), 'value');
+    } 
 }

@@ -2,14 +2,18 @@
 
 namespace App\Console;
 
+use App\Models\Plan;
+use App\Models\Recorrido;
 use App\Traits\GetCurrentHistoryTable;
 use App\Traits\GetCurrentHomeTable;
+use App\Traits\GetStaticData;
+use App\Traits\GetTransactionalData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    use GetCurrentHomeTable, GetCurrentHistoryTable;
+    use GetCurrentHomeTable, GetCurrentHistoryTable, GetStaticData, GetTransactionalData;
     /**
      * Define the application's command schedule.
      */
@@ -20,12 +24,24 @@ class Kernel extends ConsoleKernel
         $schedule->call(function(){
             $this->updateTable();
         })->everyFiveMinutes();
-        // })->everyMinute();
 
         $schedule->call(function(){
             $this->updateHistory();
         })->everyFiveMinutes();
-        // })->everyMinute();
+
+        $schedule->call(function(){
+            $this->updateMovils();
+            $this->updateChofers();
+            $this->updatePuntos();
+
+            $this->updatePlans();
+            $this->updateRecorridos();
+        })->everyFiveMinutes();
+
+        $schedule->call(function(){
+            Plan::whereRaw('fecha < current_date - 30')->delete();
+            Recorrido::whereRaw('fecha < current_date - 30')->delete();
+        })->daily();
     }
 
     /**
