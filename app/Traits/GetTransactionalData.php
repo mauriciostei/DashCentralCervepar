@@ -39,13 +39,12 @@ trait GetTransactionalData{
             $consulta = DB::connection($c->value)->select("select *
             from recorridos
             where cast(inicio as date) = current_date
-                and id not in (
-                    select min(id)
+                and id in (
+                    select max(id)
                     from recorridos
                     where cast(inicio as date) = current_date
                     group by choferes_id, moviles_id, puntos_id, tiers_id, viaje
-                    having count(*) = 2
-                )");
+            )");
 
             foreach($consulta as $line):
                 Recorrido::updateOrCreate(
