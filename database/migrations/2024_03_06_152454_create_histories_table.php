@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('viaje');
             $table->date('fecha');
             $table->dateTime('inicio');
-            $table->dateTime('fin');
+            $table->dateTime('fin')->nullable();
             $table->dateTime('target');
             $table->dateTime('ponderacion');
             $table->string('estado');
