@@ -13,7 +13,21 @@ class Recorrido extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['centro','fecha','chofers_id','movils_id', 'viaje', 'puntos_id', 'tiers_id', 'inicio', 'target', 'ponderacion', 'fin', 'estado'];
+    protected $fillable = [
+        'centro'
+        ,'fecha'
+        ,'chofers_id'
+        ,'movils_id'
+        , 'viaje'
+        , 'puntos_id'
+        , 'tiers_id'
+        , 'viaje'
+        , 'inicio'
+        , 'target'
+        , 'ponderacion'
+        , 'fin'
+        , 'estado'
+    ];
 
     public function movils(){
         return $this->belongsTo(Movil::class);
