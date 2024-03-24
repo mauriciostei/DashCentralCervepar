@@ -37,7 +37,9 @@ trait GetTransactionalData{
 
     public function updateRecorridos(){
         foreach(CDS::cases() as $c):
-            $consulta = DB::connection($c->value)->select("select *
+            $consulta = DB::connection($c->value)->select("select *,
+                '$c->value' centro,
+                current_date fecha
             from recorridos
             where cast(inicio as date) = current_date
                 and id in (
@@ -51,18 +53,18 @@ trait GetTransactionalData{
                 try{
                     Recorrido::updateOrCreate(
                         [
-                            'centro' => $c->value,
-                            'fecha' => date('Y-m-d'),
+                            'centro' => $line->centro,
+                            'fecha' => $line->fecha,
                             'chofers_id' => $line->choferes_id,
                             'movils_id' => $line->moviles_id,
                             'puntos_id' => $line->puntos_id,
                             'tiers_id' => $line->tiers_id,
                             'viaje' => $line->viaje,
+                        ], 
+                        [
                             'inicio' => $line->inicio,
                             'target' => $line->target,
                             'ponderacion' => $line->ponderacion,
-                        ], 
-                        [
                             'fin' => $line->fin,
                             'estado' => $line->estado,
                         ]);
