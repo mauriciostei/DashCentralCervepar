@@ -36,6 +36,8 @@ trait GetTransactionalData{
     }
 
     public function updateRecorridos(){
+        $table = [];
+
         foreach(CDS::cases() as $c):
             $consulta = DB::connection($c->value)->select("select *,
                 '$c->value' centro,
@@ -50,23 +52,26 @@ trait GetTransactionalData{
             )");
 
             foreach($consulta as $line):
-                Recorrido::updateOrCreate(
-                    [
-                        'centro' => $line->centro,
-                        'fecha' => $line->fecha,
-                        'chofers_id' => $line->choferes_id,
-                        'movils_id' => $line->moviles_id,
-                        'puntos_id' => $line->puntos_id,
-                        'tiers_id' => $line->tiers_id,
-                        'viaje' => $line->viaje,
-                    ], 
-                    [
-                        'inicio' => $line->inicio,
-                        'target' => $line->target,
-                        'ponderacion' => $line->ponderacion,
-                        'fin' => $line->fin,
-                        'estado' => $line->estado,
-                    ]);
+                $table[] = $line;
+            endforeach;
+
+            Recorrido::whereRaw('fecha = current_date')->delete();
+
+            foreach($table as $line):
+                Recorrido::create([
+                    'centro' => $line->centro,
+                    'fecha' => $line->fecha,
+                    'chofers_id' => $line->choferes_id,
+                    'movils_id' => $line->moviles_id,
+                    'puntos_id' => $line->puntos_id,
+                    'tiers_id' => $line->tiers_id,
+                    'viaje' => $line->viaje,
+                    'inicio' => $line->inicio,
+                    'target' => $line->target,
+                    'ponderacion' => $line->ponderacion,
+                    'fin' => $line->fin,
+                    'estado' => $line->estado,
+                ]);
             endforeach;
             
         endforeach;
