@@ -50,27 +50,23 @@ trait GetTransactionalData{
             )");
 
             foreach($consulta as $line):
-                try{
-                    Recorrido::updateOrCreate(
-                        [
-                            'centro' => $line->centro,
-                            'fecha' => $line->fecha,
-                            'chofers_id' => $line->choferes_id,
-                            'movils_id' => $line->moviles_id,
-                            'puntos_id' => $line->puntos_id,
-                            'tiers_id' => $line->tiers_id,
-                            'viaje' => $line->viaje,
-                        ], 
-                        [
-                            'inicio' => $line->inicio,
-                            'target' => $line->target,
-                            'ponderacion' => $line->ponderacion,
-                            'fin' => $line->fin,
-                            'estado' => $line->estado,
-                        ]);
-                }catch(Exception $err){
-                    return;
-                }
+                Recorrido::updateOrCreate(
+                    [
+                        'centro' => $line->centro,
+                        'fecha' => $line->fecha,
+                        'chofers_id' => $line->choferes_id,
+                        'movils_id' => $line->moviles_id,
+                        'puntos_id' => $line->puntos_id,
+                        'tiers_id' => $line->tiers_id,
+                        'viaje' => $line->viaje,
+                    ], 
+                    [
+                        'inicio' => $line->inicio,
+                        'target' => $line->target,
+                        'ponderacion' => $line->ponderacion,
+                        'fin' => $line->fin,
+                        'estado' => $line->estado,
+                    ]);
             endforeach;
             
         endforeach;

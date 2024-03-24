@@ -9,19 +9,20 @@ class Recorrido extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = null;
+    protected $primaryKey = ['centro','fecha','chofers_id','movils_id', 'puntos_id', 'tiers_id', 'viaje'];
     public $incrementing = false;
     public $timestamps = false;
 
     protected $fillable = [
+        // Datos PK
         'centro'
         ,'fecha'
         ,'chofers_id'
         ,'movils_id'
-        , 'viaje'
         , 'puntos_id'
         , 'tiers_id'
         , 'viaje'
+        // Datos adicionales
         , 'inicio'
         , 'target'
         , 'ponderacion'
