@@ -28,6 +28,7 @@ class Recorrido extends Model
         , 'ponderacion'
         , 'fin'
         , 'estado'
+        , 'turno'
     ];
 
     public function movils(){
