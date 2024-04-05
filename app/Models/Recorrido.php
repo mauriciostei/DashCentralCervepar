@@ -29,6 +29,7 @@ class Recorrido extends Model
         , 'fin'
         , 'estado'
         , 'turno'
+        , 'ayudantes_id'
     ];
 
     public function movils(){
@@ -41,5 +42,9 @@ class Recorrido extends Model
 
     public function puntos(){
         return $this->belongsTo(Punto::class);
+    }
+
+    public function ayudantes(){
+        return $this->belongsTo(Ayudante::class);
     }
 }

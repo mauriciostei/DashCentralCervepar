@@ -14,6 +14,7 @@ trait GetCurrentHistoryTable{
             select '$c->value' centro
                 , m.nombre movil
                 , c.nombre chofer
+                , a.nombre ayudante
                 , p.nombre punto
                 , r.viaje
                 , current_date fecha
@@ -31,6 +32,7 @@ trait GetCurrentHistoryTable{
                 join moviles m on m.id = r.moviles_id
                 join choferes c on c.id = r.choferes_id
                 join puntos p on p.id = r.puntos_id
+                left join ayudantes a on a.id = r.ayudantes_id
             where r.tiers_id = 1
                 and cast(r.inicio as date) = current_date
             ");
@@ -53,6 +55,7 @@ trait GetCurrentHistoryTable{
                         'ponderacion' => $line->ponderacion,
                         'estado' => $line->estado,
                         'aplica' => $line->aplica,
+                        'ayudante' => $line->ayudante,
                     ]
                 );
 

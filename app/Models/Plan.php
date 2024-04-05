@@ -13,7 +13,7 @@ class Plan extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['centro','id','fecha','chofers_id','movils_id', 'viaje', 'hora_esperada', 'corresponde'];
+    protected $fillable = ['centro','id','fecha','chofers_id','movils_id', 'viaje', 'hora_esperada', 'corresponde', 'ayudantes_id'];
 
     public function movils(){
         return $this->belongsTo(Movil::class);
@@ -21,5 +21,9 @@ class Plan extends Model
 
     public function chofers(){
         return $this->belongsTo(Chofer::class);
+    }
+
+    public function ayudantes(){
+        return $this->belongsTo(Ayudante::class);
     }
 }

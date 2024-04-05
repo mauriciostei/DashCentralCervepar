@@ -33,6 +33,7 @@ class Kernel extends ConsoleKernel
             $this->updateMovils();
             $this->updateChofers();
             $this->updatePuntos();
+            $this->updateAyudantes();
 
             $this->updatePlans();
             $this->updateRecorridos();

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Enums\CDS;
+use App\Models\Ayudante;
 use App\Models\Chofer;
 use App\Models\Movil;
 use App\Models\Punto;
@@ -40,6 +41,17 @@ trait GetStaticData{
 
             foreach($consulta as $line):
                 Punto::updateOrCreate([ 'centro' => $c->value, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'minimo' => $line->minimo, 'maximo' => $line->maximo, 'tiempos_financieros' => $line->tiempos_financieros, 'tipo_tiempo' => $line->tipo_tiempo, 'tiempos_fisicos' => $line->tiempos_fisicos ]);
+            endforeach;
+            
+        endforeach;
+    }
+
+    public function updateAyudantes(){
+        foreach(CDS::cases() as $c):
+            $consulta = DB::connection($c->value)->select("select * from ayudantes");
+
+            foreach($consulta as $line):
+                Ayudante::updateOrCreate([ 'centro' => $c->value, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
             endforeach;
             
         endforeach;

@@ -14,7 +14,7 @@ trait GetTransactionalData{
         $table = [];
 
         foreach(CDS::cases() as $c):
-            $consulta = DB::connection($c->value)->select("select '$c->value' centro, p.fecha, cmp.choferes_id, cmp.moviles_id, cmp.viaje, cmp.hora_esperada, cmp.corresponde
+            $consulta = DB::connection($c->value)->select("select '$c->value' centro, p.fecha, cmp.choferes_id, cmp.moviles_id, cmp.viaje, cmp.hora_esperada, cmp.corresponde, cmp.ayudantes_id
             from planes p
                 join choferes_moviles_planes cmp on p.id = cmp.planes_id
             where fecha = current_date");
@@ -37,6 +37,7 @@ trait GetTransactionalData{
                     'viaje' => $line->viaje,
                     'hora_esperada' => $line->hora_esperada,
                     'corresponde' => $line->corresponde,
+                    'ayudantes_id' => $line->ayudantes_id,
                 ]);
             }catch(Exception $err){}
         endforeach;
@@ -98,6 +99,7 @@ trait GetTransactionalData{
                     'fin' => $line->fin,
                     'estado' => $line->estado,
                     'turno' => $line->turno,
+                    'ayudantes_id' => $line->ayudantes_id,
                 ]);
             }catch(Exception $err){}
         endforeach;
