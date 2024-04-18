@@ -34,6 +34,9 @@ if(pareto){
           },
           tooltip: {
             callbacks: {
+              title: function(){
+                return ''
+              },
               label: function(context){
                 return context.parsed.y
               }

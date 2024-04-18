@@ -48,6 +48,9 @@ if(timeLost){
         },
         tooltip: {
           callbacks: {
+            title: function(){
+              return ''
+            },
             label: function(context){
               return time(context.parsed.x)
             }

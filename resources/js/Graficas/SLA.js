@@ -30,6 +30,9 @@ if(sla){
             },
             tooltip: {
               callbacks: {
+                title: function(){
+                  return ''
+                },
                 label: function(context){
                   return context.parsed
                 }
