@@ -27,6 +27,13 @@ if(cantidadAnomalias){
             plugins: {
               legend: {
                 position: 'bottom',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context){
+                    return context.parsed
+                  }
+                }
               }
             }
         }

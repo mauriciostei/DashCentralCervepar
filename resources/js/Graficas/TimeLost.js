@@ -38,19 +38,19 @@ if(timeLost){
           align: 'center',
           clamp: true,
           formatter: function(value){
-            let ss, mm, hh, dd = 0;
-
-            ss = value;
-            mm = Math.floor( ss / 60 ); ss = ss % 60;
-            hh = Math.floor( mm / 60 ); mm = mm % 60;
-            dd = Math.floor( hh / 24 ); hh = hh % 24;
-
-            return dd + 'd ' + PadLeft(hh, 2) + ':' + PadLeft(mm, 2) + ':' + PadLeft(ss, 2);
+            return time(value)
           },
           color: '#000',
           font: {
             weight: 'bold',
             size: 14,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context){
+              return time(context.parsed.x)
+            }
           }
         }
       },
@@ -70,6 +70,17 @@ if(timeLost){
 
 function PadLeft(value, length) {
   return (value.toString().length < length) ? PadLeft("0" + value, length) : value;
+}
+
+function time(value){
+  let ss, mm, hh, dd = 0;
+
+  ss = value;
+  mm = Math.floor( ss / 60 ); ss = ss % 60;
+  hh = Math.floor( mm / 60 ); mm = mm % 60;
+  dd = Math.floor( hh / 24 ); hh = hh % 24;
+
+  return dd + 'd ' + PadLeft(hh, 2) + ':' + PadLeft(mm, 2) + ':' + PadLeft(ss, 2);
 }
 
 Livewire.on('updateTableTimeLost', (grafica) => {

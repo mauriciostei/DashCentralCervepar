@@ -31,6 +31,13 @@ if(pareto){
         plugins: {
           legend: {
             display: false,
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context){
+                return context.parsed.y
+              }
+            }
           }
         },
         scales: {
