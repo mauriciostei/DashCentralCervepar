@@ -13,10 +13,10 @@ trait GetStaticData{
 
     public function updateMovils(){
         foreach(CDS::cases() as $c):
-            $consulta = DB::connection($c->value)->select("select id, tiers_id, nombre, chapa, chapa_trasera from moviles");
+            $consulta = DB::connection($c->value)->select("select '$c->value' as centro, id, tiers_id, nombre, chapa, chapa_trasera from moviles");
 
             foreach($consulta as $line):
-                Movil::updateOrCreate([ 'centro' => $c->value, 'id' => $line->id ], [ 'tiers_id' => $line->tiers_id, 'nombre' => $line->nombre, 'chapa' => $line->chapa, 'chapa_trasera' => $line->chapa_trasera ]);
+                Movil::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'tiers_id' => $line->tiers_id, 'nombre' => $line->nombre, 'chapa' => $line->chapa, 'chapa_trasera' => $line->chapa_trasera ]);
             endforeach;
             
         endforeach;
@@ -24,12 +24,12 @@ trait GetStaticData{
 
     public function updateChofers(){
         foreach(CDS::cases() as $c):
-            $consulta = DB::connection($c->value)->select("select c.id, c.nombre, documento, tiers_id, o.nombre operadora
+            $consulta = DB::connection($c->value)->select("select '$c->value' as centro, c.id, c.nombre, documento, tiers_id, o.nombre operadora
             from choferes c
                 left join operadoras o on c.operadoras_id = o.id");
 
             foreach($consulta as $line):
-                Chofer::updateOrCreate([ 'centro' => $c->value, 'id' => $line->id ], [ 'tiers_id' => $line->tiers_id, 'nombre' => $line->nombre, 'documento' => $line->documento, 'operadora' => $line->operadora ]);
+                Chofer::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'tiers_id' => $line->tiers_id, 'nombre' => $line->nombre, 'documento' => $line->documento, 'operadora' => $line->operadora ]);
             endforeach;
             
         endforeach;
@@ -37,10 +37,10 @@ trait GetStaticData{
 
     public function updatePuntos(){
         foreach(CDS::cases() as $c):
-            $consulta = DB::connection($c->value)->select("select id, nombre, minimo, maximo, tiempos_financieros, tipo_tiempo, tiempos_fisicos from puntos");
+            $consulta = DB::connection($c->value)->select("select '$c->value' as centro, id, nombre, minimo, maximo, tiempos_financieros, tipo_tiempo, tiempos_fisicos from puntos");
 
             foreach($consulta as $line):
-                Punto::updateOrCreate([ 'centro' => $c->value, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'minimo' => $line->minimo, 'maximo' => $line->maximo, 'tiempos_financieros' => $line->tiempos_financieros, 'tipo_tiempo' => $line->tipo_tiempo, 'tiempos_fisicos' => $line->tiempos_fisicos ]);
+                Punto::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'minimo' => $line->minimo, 'maximo' => $line->maximo, 'tiempos_financieros' => $line->tiempos_financieros, 'tipo_tiempo' => $line->tipo_tiempo, 'tiempos_fisicos' => $line->tiempos_fisicos ]);
             endforeach;
             
         endforeach;
@@ -48,10 +48,10 @@ trait GetStaticData{
 
     public function updateAyudantes(){
         foreach(CDS::cases() as $c):
-            $consulta = DB::connection($c->value)->select("select * from ayudantes");
+            $consulta = DB::connection($c->value)->select("select '$c->value' as centro, * from ayudantes");
 
             foreach($consulta as $line):
-                Ayudante::updateOrCreate([ 'centro' => $c->value, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
+                Ayudante::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
             endforeach;
             
         endforeach;
