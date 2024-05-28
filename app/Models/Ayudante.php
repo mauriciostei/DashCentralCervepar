@@ -16,4 +16,20 @@ class Ayudante extends Model
     public function recorridos(){
         return $this->hasMany(Recorrido::class);
     }
+
+    protected function setKeysForSelectQuery($query){
+        $query
+            ->where('centro', $this->getAttribute('centro'))
+            ->where('id', $this->getAttribute('id'))
+        ;
+        return $query;
+    }
+
+    protected function setKeysForSaveQuery($query){
+        $query
+            ->where('centro', $this->getAttribute('centro'))
+            ->where('id', $this->getAttribute('id'))
+        ;
+        return $query;
+    }
 }
