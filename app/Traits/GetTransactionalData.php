@@ -60,7 +60,7 @@ trait GetTransactionalData{
             reco as (
                 select *,
                     '$c->value' centro,
-                    current_date fecha
+                    current_date - $days fecha
                 from recorridos
                 where cast(inicio as date) = current_date - $days
                     and id in (
