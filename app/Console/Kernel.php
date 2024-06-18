@@ -42,6 +42,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function(){
             Plan::whereRaw('fecha < current_date - 30')->delete();
             Recorrido::whereRaw('fecha < current_date - 30')->delete();
+
+            $this->updateRecorridos(1);
         })->daily();
     }
 

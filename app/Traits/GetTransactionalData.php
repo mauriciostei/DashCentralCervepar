@@ -43,7 +43,7 @@ trait GetTransactionalData{
         endforeach;
     }
 
-    public function updateRecorridos(){
+    public function updateRecorridos($days = 0){
         $table = [];
 
         foreach(CDS::cases() as $c):
@@ -66,7 +66,7 @@ trait GetTransactionalData{
                     and id in (
                         select max(id)
                         from recorridos
-                        where cast(inicio as date) = current_date
+                        where cast(inicio as date) = current_date - $days
                         group by choferes_id, moviles_id, puntos_id, tiers_id, viaje
                 )
             )
@@ -81,7 +81,7 @@ trait GetTransactionalData{
             
         endforeach;
 
-        Recorrido::whereRaw('fecha = current_date')->delete();
+        Recorrido::whereRaw("fecha = current_date - $days")->delete();
 
         foreach($table as $line):
             try{
