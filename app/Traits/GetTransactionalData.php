@@ -62,7 +62,7 @@ trait GetTransactionalData{
                     '$c->value' centro,
                     current_date fecha
                 from recorridos
-                where cast(inicio as date) = current_date
+                where cast(inicio as date) = current_date - $days
                     and id in (
                         select max(id)
                         from recorridos
