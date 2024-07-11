@@ -63,12 +63,6 @@ trait GetTransactionalData{
                     current_date - $days fecha
                 from recorridos
                 where cast(inicio as date) = current_date - $days
-                    and id in (
-                        select max(id)
-                        from recorridos
-                        where cast(inicio as date) = current_date - $days
-                        group by choferes_id, moviles_id, puntos_id, tiers_id, viaje
-                )
             )
             
             select r.*, gr.turno
