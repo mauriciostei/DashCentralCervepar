@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Enums\CDS;
 use App\Models\Ayudante;
 use App\Models\Chofer;
+use App\Models\Colaboradores;
 use App\Models\Movil;
 use App\Models\Punto;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,17 @@ trait GetStaticData{
 
             foreach($consulta as $line):
                 Ayudante::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
+            endforeach;
+            
+        endforeach;
+    }
+
+    public function updateColaboradores(){
+        foreach(CDS::cases() as $c):
+            $consulta = DB::connection($c->value)->select("select '$c->value' as centro, * from colaboradores");
+
+            foreach($consulta as $line):
+                Colaboradores::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
             endforeach;
             
         endforeach;

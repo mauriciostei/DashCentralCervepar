@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\JornadaWarehouse;
 use App\Models\Plan;
 use App\Models\Recorrido;
 use App\Traits\GetCurrentHistoryTable;
@@ -34,16 +35,20 @@ class Kernel extends ConsoleKernel
             $this->updateChofers();
             $this->updatePuntos();
             $this->updateAyudantes();
+            $this->updateColaboradores();
 
             $this->updatePlans();
             $this->updateRecorridos();
+            $this->updateWarehouse();
         })->everyFiveMinutes();
 
         $schedule->call(function(){
             Plan::whereRaw('fecha < current_date - 30')->delete();
             Recorrido::whereRaw('fecha < current_date - 30')->delete();
+            JornadaWarehouse::whereRaw('fecha < current_date - 30')->delete();
 
             $this->updateRecorridos(1);
+            $this->updateWarehouse(1);
         })->daily();
     }
 

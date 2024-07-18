@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Enums\CDS;
+use App\Models\JornadaWarehouse;
 use App\Models\Plan;
 use App\Models\Recorrido;
 use Exception;
@@ -94,6 +95,36 @@ trait GetTransactionalData{
                     'estado' => $line->estado,
                     'turno' => $line->turno,
                     'ayudantes_id' => $line->ayudantes_id,
+                ]);
+            }catch(Exception $err){}
+        endforeach;
+    }
+
+    public function updateWarehouse($days = 0){
+        $table = [];
+
+        foreach(CDS::cases() as $c):
+            $consulta = DB::connection($c->value)->select("select *, cast(fecha_hora as date) fecha, '$c->value' centro
+                from jornada_warehouses
+                where cast(fecha_hora as date) = current_date - $days");
+
+            foreach($consulta as $line):
+                $table[] = $line;
+            endforeach;
+            
+        endforeach;
+
+        JornadaWarehouse::whereRaw("fecha = current_date - $days")->delete();
+
+        foreach($table as $line):
+            try{
+                JornadaWarehouse::create([
+                    'centro' => $line->centro,
+                    'id' => $line->id,
+                    'colaboradores_id' => $line->colaboradores_id,
+                    'puntos_id' => $line->puntos_id,
+                    'fecha' => $line->fecha,
+                    'fecha_hora' => $line->fecha_hora,
                 ]);
             }catch(Exception $err){}
         endforeach;
