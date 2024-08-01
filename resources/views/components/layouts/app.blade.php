@@ -12,7 +12,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     {{-- <body data-bs-theme="dark"> --}}
-    <body>
+    <body class="vh-100 d-flex flex-column">
         
         @auth
             @persist('navbar')
@@ -20,7 +20,9 @@
             @endpersist
         @endauth
 
-        {{$slot}}
+        <div class="flex-grow-1 d-flex flex-column">
+            {{$slot}}
+        </div>
     </body>
 
     <x-toast-message/>

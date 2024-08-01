@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Models\JornadaWarehouse;
 use App\Models\Plan;
 use App\Models\Recorrido;
+use App\Models\TotalAnomalias;
 use App\Traits\GetCurrentHistoryTable;
 use App\Traits\GetCurrentHomeTable;
 use App\Traits\GetStaticData;
@@ -40,12 +41,16 @@ class Kernel extends ConsoleKernel
             $this->updatePlans();
             $this->updateRecorridos();
             $this->updateWarehouse();
+
+            $hoy = date('Y-m-d');
+            $this->updateAnomalias($hoy, $hoy);
         })->everyFiveMinutes();
 
         $schedule->call(function(){
             Plan::whereRaw('fecha < current_date - 30')->delete();
             Recorrido::whereRaw('fecha < current_date - 30')->delete();
             JornadaWarehouse::whereRaw('fecha < current_date - 30')->delete();
+            TotalAnomalias::whereRaw('fecha < current_date - 30')->delete();
 
             $this->updateRecorridos(1);
             $this->updateWarehouse(1);

@@ -31,6 +31,12 @@ class CurrentData extends Model
         return $actual > $corte;
     }
 
+    public function getTMAEstadoAttribute(){
+        $actual = $this->toSecond($this->tma);
+        $corte = $this->toSecond($this->tiempo_tma);
+        return $actual/$corte;
+    }
+
     public function getTiempoPerdidoAttribute(){
         if($this->tma_roto){
             $actual = $this->toSecond($this->tma);

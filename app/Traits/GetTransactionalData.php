@@ -6,8 +6,10 @@ use App\Enums\CDS;
 use App\Models\JornadaWarehouse;
 use App\Models\Plan;
 use App\Models\Recorrido;
+use App\Models\TotalAnomalias;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 trait GetTransactionalData{
 
@@ -130,4 +132,39 @@ trait GetTransactionalData{
         endforeach;
     }
 
+    public function updateAnomalias($ini, $fin){
+        $table = [];
+
+        foreach(CDS::cases() as $c):
+            $consulta = DB::connection($c->value)->select("
+            select '$c->value' Centro
+                , cast(a.created_at as date) fecha
+                , count(*) total
+                , count(a.users_id) tratadas
+            from recorridos r
+                join alertas a on r.id = a.recorridos_id and a.tipos_alertas_id = 2
+            where
+                r.tiers_id = 1
+                and cast(a.created_at as date) between '$ini' and '$fin'
+            group by cast(a.created_at as date)
+            ");
+
+            foreach($consulta as $line):
+                $table[] = $line;
+            endforeach;
+        endforeach;
+
+        TotalAnomalias::whereRaw("fecha between '$ini' and '$fin' ")->delete();
+
+        foreach($table as $line):
+            try{
+                TotalAnomalias::create([
+                    'centro' => $line->centro,
+                    'fecha' => $line->fecha,
+                    'total' => $line->total,
+                    'tratadas' => $line->tratadas,
+                ]);
+            }catch(Exception $err){}
+        endforeach;
+    }
 }

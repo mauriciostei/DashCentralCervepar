@@ -16,7 +16,6 @@ class TableMovil extends Component
 
     public $centros = [];
     public $moviles = [];
-    public $puntos = [];
     public $operadoras = [];
 
     public $column = 'centro';
@@ -27,7 +26,6 @@ class TableMovil extends Component
             whereIn('centro', $this->centros)
             ->whereIn('movil', $this->moviles)
             ->whereIn('operador', $this->operadoras)
-            ->whereIn('punto', $this->puntos)
             ->orderBy($this->column, $this->orden)
             ->get()
         ;
@@ -55,11 +53,6 @@ class TableMovil extends Component
     #[On('updateFiltermovil')]
     public function updateMoviles($filters){
         $this->moviles = $filters;
-    }
-
-    #[On('updateFilterpunto')]
-    public function updatePuntos($filters){
-        $this->puntos = $filters;
     }
 
     #[On('updateFilteroperador')]

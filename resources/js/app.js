@@ -12,6 +12,7 @@ require('./Graficas/CantidadAnomaliasPendientes');
 require('./Graficas/TimeLost');
 require('./Graficas/SLA');
 require('./Graficas/Pareto');
+require('./Graficas/TotalAnomalias');
 
 const toastElList = document.querySelectorAll('.toast')
 const toastList = [...toastElList].map(toastEl => new Toast(toastEl).show())
