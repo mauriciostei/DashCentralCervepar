@@ -16,18 +16,30 @@ class Alertas extends Component
 
             $resultado = "bg-transparent";
             $data = CurrentData::where('centro', $line->value)->get();
+
+            $danger = 0;
+            $warning = 0;
+            $success = 0;
+
             foreach($data as $reg):
                 if($reg->tma_estado >= 1){
-                    $resultado = "bg-danger";
-                    break;
+                    $danger++;
                 }
                 if($reg->tma_estado >= 0.7 && $reg->tma_estado < 1){
-                    $resultado = "bg-warning";
-                    break;
+                    $warning++;
                 }
                 if($reg->tma_estado < 0.7){
-                    $resultado = "bg-success";
-                    break;
+                    $success++;
+                }
+
+                if($danger > 0){
+                    $resultado = "bg-danger";
+                }else{
+                    if($warning > 0){
+                        $resultado = "bg-warning";
+                    }else{
+                        $resultado = "bg-success";
+                    }
                 }
             endforeach;
 
