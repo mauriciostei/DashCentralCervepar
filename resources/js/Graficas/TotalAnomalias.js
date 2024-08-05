@@ -62,7 +62,7 @@ if(totalAnomalias){
             ticks: {
               stepSize: 1,
               callback: function(value, index, ticks){
-                return  index  + ' Anomalía';
+                return index<2 ? index+' Anomalía' : index+' Anomalías';
               }
             }
           }
