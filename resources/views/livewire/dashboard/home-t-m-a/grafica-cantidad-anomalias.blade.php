@@ -9,7 +9,7 @@
 
     <div class="flex-grow-1 position-relative">
         <div class="chart position-absolute top-50 start-50 translate-middle py-5">
-            <canvas id="TotalAnomalias" width="900" height="500"></canvas>
+            <canvas id="TotalAnomalias" width="910" height="500"></canvas>
         </div>
     </div>
 
