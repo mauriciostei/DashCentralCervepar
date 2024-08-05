@@ -28,9 +28,9 @@
                         <td style="width: 25%;"> {{ $line->movil }} </td>
                         <td style="width: 25%;"> {{ $line->operador }} </td>
                         <td style="width: 25%;">
-                            @if($line->tma_estado < 0.70)
+                            @if($line->tma_estado < 0.7)
                                 <span class="text-success" style="text-shadow: 2px 2px 4px #000000;">{{ $line->tma }}</span>
-                            @elseif($line->tma_estado >= 0.70 && $line->tma_estado < 1)
+                            @elseif($line->tma_estado >= 0.7 && $line->tma_estado < 1)
                                 <span class="text-warning" style="text-shadow: 2px 2px 4px #000000;">{{ $line->tma }}</span>
                             @else
                                 <span class="text-danger" style="text-shadow: 2px 2px 4px #000000;">{{ $line->tma }}</span>

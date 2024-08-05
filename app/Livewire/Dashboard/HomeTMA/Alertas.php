@@ -19,13 +19,15 @@ class Alertas extends Component
             foreach($data as $reg):
                 if($reg->tma_estado >= 1){
                     $resultado = "bg-danger";
-                    break 2;
-                }elseif($reg->tma_estado >= 0.70 && $reg->tma_estado < 1){
+                    break;
+                }
+                if($reg->tma_estado >= 0.7 && $reg->tma_estado < 1){
                     $resultado = "bg-warning";
-                    break 2;
-                }else{
+                    break;
+                }
+                if($reg->tma_estado < 0.7){
                     $resultado = "bg-success";
-                    break 2;
+                    break;
                 }
             endforeach;
 
