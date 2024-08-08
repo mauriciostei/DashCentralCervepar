@@ -16,7 +16,8 @@ class TableMovil extends Component
 
     public $centros = [];
     public $moviles = [];
-    public $operadoras = [];
+    // public $operadoras = [];
+    public $sitios = [];
 
     public $column = 'centro';
     public $orden = 'asc';
@@ -25,7 +26,8 @@ class TableMovil extends Component
         $this->tabla = CurrentData::
             whereIn('centro', $this->centros)
             ->whereIn('movil', $this->moviles)
-            ->whereIn('operador', $this->operadoras)
+            // ->whereIn('operador', $this->operadoras)
+            ->whereIn('punto', $this->sitios)
             ->orderBy($this->column, $this->orden)
             ->get()
         ;
@@ -55,9 +57,14 @@ class TableMovil extends Component
         $this->moviles = $filters;
     }
 
-    #[On('updateFilteroperador')]
-    public function updateOperadoras($filters){
-        $this->operadoras = $filters;
+    // #[On('updateFilteroperador')]
+    // public function updateOperadoras($filters){
+    //     $this->operadoras = $filters;
+    // }
+
+    #[On('updateFilterpunto')]
+    public function updatePuntos($filters){
+        $this->sitios = $filters;
     }
 
     public function render()

@@ -14,8 +14,11 @@
                 <th>
                     @livewire('dashboard.home-t-m-a.search-internal', [ 'title' => 'Móviles', 'column' => 'movil'])
                 </th>
-                <th>
+                {{-- <th>
                     @livewire('dashboard.home-t-m-a.search-internal', [ 'title' => 'OL', 'column' => 'operador'])
+                </th> --}}
+                <th>
+                    @livewire('dashboard.home-t-m-a.search-internal', [ 'title' => 'Sitio', 'column' => 'punto'])
                 </th>
                 <th>
                     TMA
@@ -26,7 +29,8 @@
                     <tr>
                         <td style="width: 25%;"> {{ $line->centro }} </td>
                         <td style="width: 25%;"> {{ $line->movil }} </td>
-                        <td style="width: 25%;"> {{ $line->operador }} </td>
+                        {{-- <td style="width: 25%;"> {{ $line->operador }} </td> --}}
+                        <td style="width: 25%;"> {{ $line->punto }} </td>
                         <td style="width: 25%;">
                             @if($line->tma_estado < 0.7)
                                 <span class="text-success" style="text-shadow: 2px 2px 4px #000000;">{{ $line->tma }}</span>
