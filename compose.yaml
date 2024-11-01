@@ -28,7 +28,7 @@ services:
     volumes:
       - ./:/var/www
     ports:
-      - 8000:80
+      - 8080:80
     networks:
       - shared-net
   database:
@@ -41,7 +41,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: dashCentralCervepar
     ports:
-      - 5555:5432
+      - 5556:5432
     networks:
       - shared-net
 
