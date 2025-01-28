@@ -1,4 +1,4 @@
-<div class="card card-body m-3 d-flex flex-column flex-grow-1" wire:poll.1s="getInfo">
+<div class="card card-body m-3 d-flex flex-column flex-grow-1" wire:poll.1s="getInfo" style="height: 237px;">
 
     <div class="d-flex flex-row justify-content-between mb-3">
         <h5>Alertas de desvíos</h5>

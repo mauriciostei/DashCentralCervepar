@@ -64,6 +64,14 @@ if(totalAnomalias){
               callback: function(value, index, ticks){
                 return index<2 ? index+' Anomalía' : index+' Anomalías';
               }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
             }
           }
         }

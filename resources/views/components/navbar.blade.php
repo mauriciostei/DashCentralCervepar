@@ -1,4 +1,4 @@
-<div class="bg-primary p-2 my-2 mx-3 d-flex flex-row justify-content-between align-items-center rounded shadow-xl">
+<div class="bg-transparent p-2 my-2 mx-3 d-flex flex-row justify-content-between align-items-center rounded shadow-xl">
     <div class="d-flex flex-row justify-content-between align-items-center">
         <a href="{{ route('home') }}" class="m-2 me-4">
             <img src="{{ asset('img/logo.png') }}" alt="Logo de la empresa" width="150">
