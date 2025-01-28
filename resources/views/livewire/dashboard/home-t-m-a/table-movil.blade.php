@@ -50,7 +50,7 @@
             <tfoot>
                 <tr>
                     <th colspan="3"></th>
-                    <th style="text-shadow: 2px 2px 4px #000000;"> {{ $tiempo_perdido }} </th>
+                    <th style="text-shadow: 2px 2px 4px #000000; font-size: 16px;"> {{ $tiempo_perdido }} </th>
                 </tr>
             </tfoot>
         </table>
