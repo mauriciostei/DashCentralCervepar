@@ -30,9 +30,11 @@ class SLA extends Component
 
         foreach($this->cds as $cd):
             if($cd['visible']):
-                $resultado = $this->getSLA($cd['CD'], $this->ini, $this->fin)[0];
-                $this->corresponde += $resultado->corresponde;
-                $this->noCorresponde += $resultado->no_corresponde;
+                $resultado = $this->getSLA($cd['CD'], $this->ini, $this->fin);
+                if (!empty($resultado)) {
+                    $this->corresponde += $resultado[0]->corresponde;
+                    $this->noCorresponde += $resultado[0]->no_corresponde;
+                }
             endif;
         endforeach;
 

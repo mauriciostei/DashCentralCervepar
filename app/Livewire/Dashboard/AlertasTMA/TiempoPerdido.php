@@ -33,10 +33,12 @@ class TiempoPerdido extends Component
 
         foreach($this->cds as $cd):
             if($cd['visible']):
-                $resultado = $this->getTime($cd['CD'], $this->ini, $this->fin)[0];
-                $this->tiempo[] = $resultado;
-                $labels[] = $cd['CD'];
-                $data[] = $this->toSecond($resultado->resultado);
+                $resultado = $this->getTime($cd['CD'], $this->ini, $this->fin);
+                if (!empty($resultado)) {
+                    $this->tiempo[] = $resultado[0];
+                    $labels[] = $cd['CD'];
+                    $data[] = $this->toSecond($resultado[0]->resultado);
+                }
             endif;
         endforeach;
 

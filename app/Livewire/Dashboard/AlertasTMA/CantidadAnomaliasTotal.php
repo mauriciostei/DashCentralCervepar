@@ -31,7 +31,10 @@ class CantidadAnomaliasTotal extends Component
 
         foreach($this->cds as $cds):
             if($cds['visible']):
-                $this->anomalias[] = $this->getAnomalias($cds['CD'], $this->ini, $this->fin)[0];
+                $resultado = $this->getAnomalias($cds['CD'], $this->ini, $this->fin);
+                if (!empty($resultado)) {
+                    $this->anomalias[] = $resultado[0];
+                }
             endif;
         endforeach;
 

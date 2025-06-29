@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Traits\GetTransactionalData;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class UpdateRecorridos extends Command
 {
@@ -15,14 +16,19 @@ class UpdateRecorridos extends Command
 
     public function handle()
     {
-        $hoy = date('Y-m-d');
-        $fecha = date('Y-m-d', strtotime($this->argument('fecha') ?? $hoy));
+        try {
+            $hoy = date('Y-m-d');
+            $fecha = date('Y-m-d', strtotime($this->argument('fecha') ?? $hoy));
 
-        $diff = strtotime($hoy) - strtotime($fecha);
-        $days = round($diff / (60 * 60 * 24));
+            $diff = strtotime($hoy) - strtotime($fecha);
+            $days = round($diff / (60 * 60 * 24));
 
-        $this->updateRecorridos($days);
+            $this->updateRecorridos($days);
 
-        return "Se ha procesado con éxito la fecha $fecha en el sistema";
+            return "Se ha procesado con éxito la fecha $fecha en el sistema";
+        } catch (\Exception $e) {
+            Log::warning("Command failed - UpdateRecorridos");
+            return "Error al procesar la fecha $fecha en el sistema";
+        }
     }
 }

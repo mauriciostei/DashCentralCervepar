@@ -12,6 +12,7 @@ use App\Traits\GetStaticData;
 use App\Traits\GetTransactionalData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,36 +25,90 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         $schedule->call(function(){
-            $this->updateTable();
+            try {
+                $this->updateTable();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateTable");
+            }
         })->everyFiveMinutes();
 
         $schedule->call(function(){
-            $this->updateHistory();
+            try {
+                $this->updateHistory();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateHistory");
+            }
         })->everyFiveMinutes();
 
         $schedule->call(function(){
-            $this->updateMovils();
-            $this->updateChofers();
-            $this->updatePuntos();
-            $this->updateAyudantes();
-            $this->updateColaboradores();
+            try {
+                $this->updateMovils();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateMovils");
+            }
+            
+            try {
+                $this->updateChofers();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateChofers");
+            }
+            
+            try {
+                $this->updatePuntos();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updatePuntos");
+            }
+            
+            try {
+                $this->updateAyudantes();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateAyudantes");
+            }
+            
+            try {
+                $this->updateColaboradores();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateColaboradores");
+            }
 
-            $this->updatePlans();
-            $this->updateRecorridos();
-            $this->updateWarehouse();
+            try {
+                $this->updatePlans();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updatePlans");
+            }
+            
+            try {
+                $this->updateRecorridos();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateRecorridos");
+            }
+            
+            try {
+                $this->updateWarehouse();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateWarehouse");
+            }
 
-            $hoy = date('Y-m-d');
-            $this->updateAnomalias($hoy, $hoy);
+            try {
+                $hoy = date('Y-m-d');
+                $this->updateAnomalias($hoy, $hoy);
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateAnomalias");
+            }
         })->everyFiveMinutes();
 
         $schedule->call(function(){
-            Plan::whereRaw('fecha < current_date - 30')->delete();
-            Recorrido::whereRaw('fecha < current_date - 30')->delete();
-            JornadaWarehouse::whereRaw('fecha < current_date - 30')->delete();
-            TotalAnomalias::whereRaw('fecha < current_date - 30')->delete();
+            try {
+                Plan::whereRaw('fecha < current_date - 30')->delete();
+                Recorrido::whereRaw('fecha < current_date - 30')->delete();
+                JornadaWarehouse::whereRaw('fecha < current_date - 30')->delete();
+                TotalAnomalias::whereRaw('fecha < current_date - 30')->delete();
 
-            $this->updateRecorridos(1);
-            $this->updateWarehouse(1);
+                $this->updateRecorridos(1);
+                $this->updateWarehouse(1);
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - daily cleanup");
+            }
         })->daily();
     }
 
