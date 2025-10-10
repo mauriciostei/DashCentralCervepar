@@ -22,7 +22,7 @@ trait GetStaticData{
                     Movil::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'tiers_id' => $line->tiers_id, 'nombre' => $line->nombre, 'chapa' => $line->chapa, 'chapa_trasera' => $line->chapa_trasera ]);
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateMovils");
+                Log::warning("CD {$c->value} - updateMovils {$e->getMessage()}");
             }
         endforeach;
     }
@@ -38,7 +38,7 @@ trait GetStaticData{
                     Chofer::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'tiers_id' => $line->tiers_id, 'nombre' => $line->nombre, 'documento' => $line->documento, 'operadora' => $line->operadora ]);
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateChofers");
+                Log::warning("CD {$c->value} - updateChofers {$e->getMessage()}");
             }
         endforeach;
     }
@@ -52,7 +52,7 @@ trait GetStaticData{
                     Punto::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'minimo' => $line->minimo, 'maximo' => $line->maximo, 'tiempos_financieros' => $line->tiempos_financieros, 'tipo_tiempo' => $line->tipo_tiempo, 'tiempos_fisicos' => $line->tiempos_fisicos ]);
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updatePuntos");
+                Log::warning("CD {$c->value} - updatePuntos {$e->getMessage()}");
             }
         endforeach;
     }
@@ -66,7 +66,7 @@ trait GetStaticData{
                     Ayudante::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateAyudantes");
+                Log::warning("CD {$c->value} - updateAyudantes {$e->getMessage()}");
             }
         endforeach;
     }
@@ -80,7 +80,7 @@ trait GetStaticData{
                     Colaboradores::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->documento ]);
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateColaboradores");
+                Log::warning("CD {$c->value} - updateColaboradores {$e->getMessage()}");
             }
         endforeach;
     }
