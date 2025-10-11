@@ -77,7 +77,7 @@ trait GetStaticData{
                 $consulta = DB::connection($c->value)->select("select '$c->value' as centro, * from colaboradores");
 
                 foreach($consulta as $line):
-                    Colaboradores::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->documento ]);
+                    Colaboradores::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'nombre' => $line->nombre, 'documento' => $line->cedula ]);
                 endforeach;
             } catch (\Exception $e) {
                 Log::warning("CD {$c->value} - updateColaboradores {$e->getMessage()}");
