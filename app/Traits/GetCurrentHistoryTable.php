@@ -40,7 +40,24 @@ trait GetCurrentHistoryTable{
                 ");
 
                 foreach($consulta as $line):
-                    History::updateOrCreate([ 'centro' => $line->centro, 'id' => $line->id ], [ 'movil' => $line->movil, 'chofer' => $line->chofer, 'ayudante' => $line->ayudante, 'punto' => $line->punto, 'viaje' => $line->viaje, 'fecha' => $line->fecha, 'inicio' => $line->inicio, 'fin' => $line->fin, 'target' => $line->target, 'ponderacion' => $line->ponderacion, 'estado' => $line->estado, 'aplica' => $line->aplica ]);
+                    History::updateOrCreate(
+                        [
+                            'centro' => $line->centro,
+                            'movil' => $line->movil,
+                            'chofer' => $line->chofer,
+                            'punto' => $line->punto,
+                            'viaje' => $line->viaje,
+                            'fecha' => $line->fecha,
+                        ],
+                        [
+                            'inicio' => $line->inicio,
+                            'fin' => $line->fin,
+                            'target' => $line->target,
+                            'ponderacion' => $line->ponderacion,
+                            'estado' => $line->estado,
+                            'aplica' => $line->aplica,
+                        ]
+                    );
                 endforeach;
             } catch (\Exception $e) {
                 Log::warning("CD {$c->value} - updateHistory: {$e->getMessage()}");
