@@ -48,9 +48,9 @@ trait GetCurrentHistoryTable{
                             'punto' => $line->punto,
                             'viaje' => $line->viaje,
                             'fecha' => $line->fecha,
+                            'inicio' => $line->inicio,
                         ],
                         [
-                            'inicio' => $line->inicio,
                             'fin' => $line->fin,
                             'target' => $line->target,
                             'ponderacion' => $line->ponderacion,
