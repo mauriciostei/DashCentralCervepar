@@ -27,7 +27,7 @@ trait GetTransactionalData{
                     $table[] = $line;
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updatePlans");
+                Log::warning("CD {$c->value} - updatePlans: {$e->getMessage()}");
             }
         endforeach;
 
@@ -80,7 +80,7 @@ trait GetTransactionalData{
                     $table[] = $line;
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateRecorridos");
+                Log::warning("CD {$c->value} - updateRecorridos: {$e->getMessage()}");
             }
         endforeach;
 
@@ -121,7 +121,7 @@ trait GetTransactionalData{
                     $table[] = $line;
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateWarehouse");
+                Log::warning("CD {$c->value} - updateWarehouse: {$e->getMessage()}");
             }
         endforeach;
 
@@ -163,7 +163,7 @@ trait GetTransactionalData{
                     $table[] = $line;
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateAnomalias");
+                Log::warning("CD {$c->value} - updateAnomalias: {$e->getMessage()}");
             }
         endforeach;
 

@@ -55,7 +55,7 @@ trait GetCurrentTMATable{
                 join puntos p on p.id = d.puntos_id
             ");
         } catch (\Exception $e) {
-            Log::warning("CD {$cd} - getTMATableByCD");
+            Log::warning("CD {$cd} - getTMATableByCD: {$e->getMessage()}");
             return [];
         }
     }

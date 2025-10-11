@@ -26,7 +26,7 @@ trait GetSLA{
                 and cast(a.created_at as date) between '$ini' and '$fin'
             ");
         } catch (\Exception $e) {
-            Log::warning("CD {$cd} - getSLA");
+            Log::warning("CD {$cd} - getSLA: {$e->getMessage()}");
             return [];
         }
     }

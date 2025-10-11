@@ -20,7 +20,7 @@ trait GetParetoMotivos{
             order by 3 desc
             ");
         } catch (\Exception $e) {
-            Log::warning("CD {$cd} - getPareto");
+            Log::warning("CD {$cd} - getPareto: {$e->getMessage()}");
             return [];
         }
     }

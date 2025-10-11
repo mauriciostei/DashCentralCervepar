@@ -55,7 +55,7 @@ trait GetCurrentHomeTable{
                     $table[] = $line;
                 endforeach;
             } catch (\Exception $e) {
-                Log::warning("CD {$c->value} - updateTable");
+                Log::warning("CD {$c->value} - updateTable: {$e->getMessage()}");
             }
         endforeach;
 

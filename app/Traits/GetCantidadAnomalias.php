@@ -20,7 +20,7 @@ trait GetCantidadAnomalias{
                 and cast(a.created_at as date) between '$ini' and '$fin'
             ");
         } catch (\Exception $e) {
-            Log::warning("CD {$cd} - getAnomalias");
+            Log::warning("CD {$cd} - getAnomalias: {$e->getMessage()}");
             return [];
         }
     }

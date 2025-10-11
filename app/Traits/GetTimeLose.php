@@ -54,7 +54,7 @@ trait GetTimeLose{
             from resultados
             ");
         } catch (\Exception $e) {
-            Log::warning("CD {$cd} - getTime");
+            Log::warning("CD {$cd} - getTime: {$e->getMessage()}");
             return [];
         }
     }
