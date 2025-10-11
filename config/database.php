@@ -63,7 +63,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
-            'options' => [ \PDO::PGSQL_ATTR_DISABLE_PREPARES => false, ]
+            'options' => [
+                \PDO::PGSQL_ATTR_DISABLE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 5, // timeout de conexión
+                'options' => "--statement_timeout=5000" // timeout de ejecución de consultas
+            ]
         ],
 
         'CDO' => [
@@ -79,7 +83,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
-            'options' => [ \PDO::PGSQL_ATTR_DISABLE_PREPARES => false, ]
+            'options' => [
+                \PDO::PGSQL_ATTR_DISABLE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 5, // timeout de conexión
+                'options' => "--statement_timeout=5000" // timeout de ejecución de consultas
+            ]
         ],
 
         'CDE' => [
@@ -95,7 +103,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
-            'options' => [ \PDO::PGSQL_ATTR_DISABLE_PREPARES => false, ]
+            'options' => [
+                \PDO::PGSQL_ATTR_DISABLE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 5, // timeout de conexión
+                'options' => "--statement_timeout=5000" // timeout de ejecución de consultas
+            ]
         ],
 
         'CDA' => [
@@ -111,7 +123,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
-            'options' => [ \PDO::PGSQL_ATTR_DISABLE_PREPARES => false, ]
+            'options' => [
+                \PDO::PGSQL_ATTR_DISABLE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 5, // timeout de conexión
+                'options' => "--statement_timeout=5000" // timeout de ejecución de consultas
+            ]
         ],
 
         'CDEnc' => [
@@ -127,7 +143,11 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
-            'options' => [ \PDO::PGSQL_ATTR_DISABLE_PREPARES => false, ]
+            'options' => [
+                \PDO::PGSQL_ATTR_DISABLE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 5, // timeout de conexión
+                'options' => "--statement_timeout=5000" // timeout de ejecución de consultas
+            ]
         ],
 
     ],
