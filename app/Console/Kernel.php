@@ -26,22 +26,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function(){
             try {
-                $this->updateTable();
-            } catch (\Exception $e) {
-                Log::warning("Scheduled task failed - updateTable");
-            }
-        })->everyFiveMinutes();
-
-        $schedule->call(function(){
-            try {
-                $this->updateHistory();
-            } catch (\Exception $e) {
-                Log::warning("Scheduled task failed - updateHistory");
-            }
-        })->everyFiveMinutes();
-
-        $schedule->call(function(){
-            try {
                 $this->updateMovils();
             } catch (\Exception $e) {
                 Log::warning("Scheduled task failed - updateMovils");
@@ -94,6 +78,18 @@ class Kernel extends ConsoleKernel
                 $this->updateAnomalias($hoy, $hoy);
             } catch (\Exception $e) {
                 Log::warning("Scheduled task failed - updateAnomalias");
+            }
+
+            try {
+                $this->updateTable();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateTable");
+            }
+
+            try {
+                $this->updateHistory();
+            } catch (\Exception $e) {
+                Log::warning("Scheduled task failed - updateHistory");
             }
         })->everyFiveMinutes();
 
