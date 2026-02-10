@@ -21,7 +21,7 @@ class TiempoPerdido extends Component
 
     #[On('updateDashAlertas')]
     public function updateInfo($filters){
-        $this->ini = $filters['ini'];
+        $this->ini = $filters['ini'] ?? date('Y-m-d');
         $this->fin = $filters['fin'];
         $this->cds = $filters['cds'];
     }

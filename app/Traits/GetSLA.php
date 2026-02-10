@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Log;
 trait GetSLA{
 
     public function getSLA($cd, $ini, $fin){
+        $ini = $ini ?? date('Y-m-d');
+
         try {
             return DB::connection($cd)->select("
             select '$cd' Centro
