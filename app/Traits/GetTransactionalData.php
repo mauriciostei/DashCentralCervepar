@@ -172,6 +172,8 @@ trait GetTransactionalData{
 
         TotalAnomalias::whereRaw("fecha between '$ini' and '$fin'")->delete();
 
+        Log::info("Ingresando updateAnomalias a la DB: {$table}");
+
         foreach($table as $line):
             try{
                 TotalAnomalias::create([
