@@ -177,7 +177,9 @@ trait GetTransactionalData{
                     'total' => $line->total,
                     'tratadas' => $line->tratadas,
                 ]);
-            }catch(Exception $err){}
+            }catch(Exception $err){
+                Log::warning("CD {$line->centro} - updateAnomalias no se puede almacenar en DB: {$e->getMessage()}");
+            }
         endforeach;
     }
 }
