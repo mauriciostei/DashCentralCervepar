@@ -144,6 +144,9 @@ trait GetTransactionalData{
     public function updateAnomalias($ini, $fin){
         $table = [];
 
+        $ini = $ini ?? date('Y-m-d');
+        $fin = $fin ?? date('Y-m-d');
+
         foreach(CDS::cases() as $c):
             try {
                 $consulta = DB::connection($c->value)->select("
@@ -155,7 +158,7 @@ trait GetTransactionalData{
                     join alertas a on r.id = a.recorridos_id and a.tipos_alertas_id = 2
                 where
                     r.tiers_id = 1
-                    and cast(a.created_at as date) between current_date and current_date
+                    and cast(a.created_at as date) between '$ini' and '$fin'
                 group by cast(a.created_at as date)
                 ");
 
