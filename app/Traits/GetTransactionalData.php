@@ -144,9 +144,6 @@ trait GetTransactionalData{
     public function updateAnomalias($ini, $fin){
         $table = [];
 
-        $ini = $ini ?? date('Y-m-d');
-        $fin = $fin ?? date('Y-m-d');
-
         foreach(CDS::cases() as $c):
             try {
                 $consulta = DB::connection($c->value)->select("
