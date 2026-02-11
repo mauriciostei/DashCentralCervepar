@@ -164,14 +164,13 @@ trait GetTransactionalData{
 
                 foreach($consulta as $line):
                     $table[] = $line;
-                endforeach;
-                Log::info("Ahora tengo: {$table}");                
+                endforeach;    
             } catch (\Exception $e) {
                 Log::warning("CD {$c->value} - updateAnomalias: {$e->getMessage()}");
             }
         endforeach;
 
-        TotalAnomalias::whereRaw("fecha between '$ini' and '$fin'")->delete();
+        // TotalAnomalias::whereRaw("fecha between '$ini' and '$fin'")->delete();
 
         Log::info("Ingresando updateAnomalias a la DB: {$table}");
 
