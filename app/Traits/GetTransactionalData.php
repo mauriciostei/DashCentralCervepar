@@ -161,16 +161,12 @@ trait GetTransactionalData{
 
                 Log::info("Se obtuvo la config para {$c->centro}")
 
-                TotalAnomalias::updateOrCreate(
-                    [
-                        'centro' => $consulta->Centro,
-                        'fecha'  => $consulta->fecha,
-                    ],
-                    [
-                        'total'     => $consulta->total,
-                        'tratadas'  => $consulta->tratadas,
-                    ]
-                );
+                foreach ($consulta as $row) {
+                    TotalAnomalias::updateOrCreate(
+                        ['centro' => $row->Centro, 'fecha' => $row->fecha],
+                        ['total' => $row->total, 'tratadas' => $row->tratadas],
+                    );
+                }
 
                 // foreach($consulta as $line):
                 //     $table[] = $line;
