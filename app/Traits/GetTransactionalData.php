@@ -142,7 +142,7 @@ trait GetTransactionalData{
     }
 
     public function updateAnomalias($ini, $fin){
-        $table = [];
+        // $table = [];
 
         foreach(CDS::cases() as $c):
             try {
@@ -159,9 +159,22 @@ trait GetTransactionalData{
                 group by cast(a.created_at as date)
                 ");
 
-                foreach($consulta as $line):
-                    $table[] = $line;
-                endforeach;    
+                Log::info("Se obtuvo la config para {$c->centro}")
+
+                TotalAnomalias::updateOrCreate(
+                    [
+                        'centro' => $consulta->Centro,
+                        'fecha'  => $consulta->fecha,
+                    ],
+                    [
+                        'total'     => $consulta->total,
+                        'tratadas'  => $consulta->tratadas,
+                    ]
+                );
+
+                // foreach($consulta as $line):
+                //     $table[] = $line;
+                // endforeach;    
             } catch (\Exception $e) {
                 Log::warning("CD {$c->value} - updateAnomalias: {$e->getMessage()}");
             }
@@ -169,19 +182,17 @@ trait GetTransactionalData{
 
         // TotalAnomalias::whereRaw("fecha between '$ini' and '$fin'")->delete();
 
-        Log::info("Ingresando updateAnomalias a la DB: {$table}");
-
-        foreach($table as $line):
-            try{
-                TotalAnomalias::create([
-                    'centro' => $line->Centro,
-                    'fecha' => $line->fecha,
-                    'total' => $line->total,
-                    'tratadas' => $line->tratadas,
-                ]);
-            }catch(Exception $err){
-                Log::warning("CD {$line->centro} - updateAnomalias no se puede almacenar en DB: {$e->getMessage()}");
-            }
-        endforeach;
+        // foreach($table as $line):
+        //     try{
+        //         TotalAnomalias::create([
+        //             'centro' => $line->Centro,
+        //             'fecha' => $line->fecha,
+        //             'total' => $line->total,
+        //             'tratadas' => $line->tratadas,
+        //         ]);
+        //     }catch(Exception $err){
+        //         Log::warning("CD {$line->centro} - updateAnomalias no se puede almacenar en DB: {$e->getMessage()}");
+        //     }
+        // endforeach;
     }
 }
