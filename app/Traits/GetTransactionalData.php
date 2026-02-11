@@ -142,7 +142,6 @@ trait GetTransactionalData{
     }
 
     public function updateAnomalias($ini, $fin){
-        // $table = [];
 
         foreach(CDS::cases() as $c):
             try {
@@ -168,27 +167,9 @@ trait GetTransactionalData{
                     );
                 }
 
-                // foreach($consulta as $line):
-                //     $table[] = $line;
-                // endforeach;    
             } catch (\Exception $e) {
                 Log::warning("CD {$c->value} - updateAnomalias: {$e->getMessage()}");
             }
         endforeach;
-
-        // TotalAnomalias::whereRaw("fecha between '$ini' and '$fin'")->delete();
-
-        // foreach($table as $line):
-        //     try{
-        //         TotalAnomalias::create([
-        //             'centro' => $line->Centro,
-        //             'fecha' => $line->fecha,
-        //             'total' => $line->total,
-        //             'tratadas' => $line->tratadas,
-        //         ]);
-        //     }catch(Exception $err){
-        //         Log::warning("CD {$line->centro} - updateAnomalias no se puede almacenar en DB: {$e->getMessage()}");
-        //     }
-        // endforeach;
     }
 }
