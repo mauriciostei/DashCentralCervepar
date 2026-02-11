@@ -91,7 +91,8 @@ class Kernel extends ConsoleKernel
             } catch (\Exception $e) {
                 Log::warning("Scheduled task failed - updateHistory");
             }
-        })->everyFiveMinutes();
+        // })->everyFiveMinutes();
+        })->everyMinute();
 
         $schedule->call(function(){
             try {

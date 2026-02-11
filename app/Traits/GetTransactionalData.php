@@ -165,6 +165,7 @@ trait GetTransactionalData{
                 foreach($consulta as $line):
                     $table[] = $line;
                 endforeach;
+                Log::info("Ahora tengo: {$table}");                
             } catch (\Exception $e) {
                 Log::warning("CD {$c->value} - updateAnomalias: {$e->getMessage()}");
             }
