@@ -158,7 +158,7 @@ trait GetTransactionalData{
                 group by cast(a.created_at as date)
                 ");
 
-                Log::info("Se obtuvo la config para {$c->centro}")
+                Log::info("Se obtuvo la config para {$c->centro}");
 
                 foreach ($consulta as $row) {
                     TotalAnomalias::updateOrCreate(
