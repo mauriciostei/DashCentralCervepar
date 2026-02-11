@@ -146,7 +146,7 @@ trait GetTransactionalData{
         foreach(CDS::cases() as $c):
             try {
                 $consulta = DB::connection($c->value)->select("
-                select '$c->value' Centro
+                select '$c->value' centro
                     , cast(a.created_at as date) fecha
                     , count(*) total
                     , count(a.users_id) tratadas
@@ -162,7 +162,7 @@ trait GetTransactionalData{
 
                 foreach ($consulta as $row) {
                     TotalAnomalias::updateOrCreate(
-                        ['centro' => $row->Centro, 'fecha' => $row->fecha],
+                        ['centro' => $row->centro, 'fecha' => $row->fecha],
                         ['total' => $row->total, 'tratadas' => $row->tratadas],
                     );
                 }
