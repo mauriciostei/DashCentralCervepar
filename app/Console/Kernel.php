@@ -74,10 +74,8 @@ class Kernel extends ConsoleKernel
             }
 
             try {
-                Log::info("antes de ejecutar");
                 $hoy = date('Y-m-d');
                 $this->updateAnomalias($hoy, $hoy);
-                Log::info("despues de ejecutar");
             } catch (\Exception $e) {
                 Log::warning("Scheduled task failed - updateAnomalias: {$e->getMessage()}");
             }
