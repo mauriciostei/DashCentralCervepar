@@ -36,6 +36,10 @@ trait AddTimeIntervals{
         $mm = str_pad($mm, 2, "0", STR_PAD_LEFT);
         $ss = str_pad($ss, 2, "0", STR_PAD_LEFT);
 
+        if($hh < 0 || $mm < 0 || $ss < 0) {
+            return "00:00:00";
+        }
+
         return "$hh:$mm:$ss";
     }
 }
